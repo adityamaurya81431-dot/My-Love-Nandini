@@ -1,199 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Valentine Love Portal</title>
+<meta charset="UTF-8">
+<title>For My Love ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg,#ff4d6d,#ff99ac);
-  color: white;
-  overflow-x: hidden;
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
+body{
+background:linear-gradient(135deg,#ff5fa2,#ff0033);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+color:white;
+text-align:center;
+}
+.screen{display:none;padding:20px;width:100%;}
+.active{display:block;}
+
+input{
+padding:12px;border:none;border-radius:20px;
+width:80%;font-size:16px;
 }
 
-.center-box {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 20px;
+button{
+margin-top:15px;
+padding:12px 25px;
+border:none;border-radius:25px;
+background:#ff3366;
+color:white;font-size:16px;
+box-shadow:0 0 10px pink;
 }
 
-input {
-  padding: 14px;
-  font-size: 18px;
-  border-radius: 12px;
-  border: none;
-  margin-top: 15px;
+#slideshow img{
+width:90%;
+border-radius:20px;
+box-shadow:0 0 15px pink;
+animation:fade 3s infinite;
 }
 
-button {
-  padding: 14px 28px;
-  margin-top: 15px;
-  border-radius: 25px;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  transition: 0.3s;
+@keyframes fade{
+0%{opacity:0;}
+20%{opacity:1;}
+80%{opacity:1;}
+100%{opacity:0;}
 }
 
-button:hover { transform: scale(1.1); }
-
-.section { display:none; padding:60px 20px; text-align:center; min-height:100vh; }
-
-.big-text { font-size: clamp(28px,5vw,42px); font-weight:bold; }
-
-.shayari { max-width:650px; margin:auto; font-size: clamp(18px,3vw,22px); line-height:1.7; }
-
-.slideImg { width:250px; height:250px; object-fit:cover; border-radius:20px; margin:10px; }
-
-.petal, .confetti {
-  position: fixed;
-  top: -10px;
-  font-size: 20px;
-  animation: fall linear forwards;
+.heart{
+position:absolute;
+font-size:20px;
+animation:float 6s linear infinite;
 }
 
-@keyframes fall {
-  to { transform: translateY(110vh); opacity:0; }
+@keyframes float{
+0%{bottom:-20px;}
+100%{bottom:100%;opacity:0;}
 }
 
-.popup {
-  position: fixed;
-  top: 50%; left: 50%; transform: translate(-50%,-50%);
-  background: rgba(0,0,0,0.9);
-  padding: 30px;
-  border-radius: 20px;
-  display:none;
-  max-width:90%;
+.noBtn{position:absolute;}
+
+#ring{font-size:80px;animation:pulse 1.5s infinite;}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.2);}
+100%{transform:scale(1);}
+}
+
+.confetti{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+pointer-events:none;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 5px pink;}
+to{text-shadow:0 0 20px hotpink;}
 }
 </style>
 </head>
 
 <body>
 
-<!-- MUSIC -->
-<div style="position:fixed;opacity:0;pointer-events:none;">
-<iframe id="ytMusic" width="0" height="0" src="https://www.youtube.com/embed/SA7AIQw-7Ms?enablejsapi=1" allow="autoplay"></iframe>
-</div>
+<!-- YOUTUBE SONG -->
+<iframe id="ytplayer"
+src="https://www.youtube.com/embed/https://youtu.be/v0Pn2G6_4dY?si=MQe--AS2Az_3ET9z?autoplay=0&loop=1&playlist=VIDEO_ID_HERE"
+style="width:0;height:0;border:0;"></iframe>
 
-<!-- PASSWORD SCREEN -->
-<div class="center-box" id="loginBox">
-<h1>💖 Enter Your Birthday Date Love 💖</h1>
-<p>Enter in ddmmyyyy format</p>
-<input type="password" id="passInput" placeholder="DDMMYYYY">
-<button onclick="checkPassword()">Enter Love Portal</button>
-</div>
-
-<!-- INTRO SLIDESHOW TEXT -->
-<div class="section" id="introSection">
-<h1>Lets see my Miss India...My Love... Nandini ❤️</h1>
-<div id="slideshow">
-<img class="slideImg" src="photo1.jpg">
-<img class="slideImg" src="photo2.jpg">
-<img class="slideImg" src="photo3.jpg">
-<img class="slideImg" src="photo4.jpg">
-</div>
+<!-- SCREEN 1 -->
+<div id="screen1" class="screen active">
+<h2>🔐 Enter Your Birthday Date Love</h2>
+<p>Hint: The day destiny smiled at me 💖</p>
+<input type="password" id="pass" placeholder="ddmmyyyy">
 <br>
-<button onclick="openLove()">Enter Love World ❤️</button>
+<button onclick="checkPass()">Unlock 💝</button>
 </div>
 
-<!-- LOVE MESSAGE -->
-<div class="section" id="loveSection">
-<div class="big-text">This one for You Miss India 💖</div>
+<!-- SCREEN 2 -->
+<div id="screen2" class="screen">
+<h1>This one for You Miss India 💖</h1>
 
-<div class="shayari">
-In the silence of my heart, your name softly stays,<br>
-Like moonlight wrapped inside my darkest days.<br>
-If love is life, then you are my only reason to be,<br>
-Every heartbeat of mine whispers — forever you and me ❤️
-</div>
+<p id="typeText"></p>
 
-<h3>🎶 Cross my heart hope to die… It’s Him & I ❤️</h3>
-
-<div style="font-size:22px">From Your Love ~ Adityaa ❤️</div>
-
-<button onclick="showProposal()">Next ❤️</button>
-</div>
-
-<!-- PROPOSAL -->
-<div class="section" id="proposalSection">
-<h1>💘 My Love 💘</h1>
-<h2>Will You be my Wife?</h2>
-<h2>Will you be my Valentine?</h2>
-
-<button onclick="sayYes()">Yes ❤️</button>
-<button id="noBtn" onmouseover="moveNo()">No 💔</button>
-
-<h2 id="celebrate" style="display:none">🎉 Hurrahh!!! Thanku love ❤️ 🎉</h2>
-
-<button onclick="sendWhatsApp()">Send Yes Screenshot 💚</button>
-</div>
-
-<!-- LOVE LETTER -->
-<div class="popup" id="loveLetter">
-<h2>💌 My Love Letter</h2>
-<p>
-Loving you is the most beautiful thing that ever happened to me.
-I promise to stand with you, laugh with you, and love you forever.
+<p id="lyric" style="margin-top:10px;font-style:italic;font-size:18px;color:#ffe6f0;animation:glow 2s infinite alternate;">
+🎵 cross my heart, hope to die 💖
 </p>
-<button onclick="closeLetter()">Close ❤️</button>
+
+<div id="slideshow">
+<img id="slide" src="photo1.jpg">
 </div>
+
+<p style="margin-top:10px;">From Your Love ~ Adityaa 💌</p>
+
+<button onclick="nextScreen()">Next 💕</button>
+</div>
+
+<!-- SCREEN 3 -->
+<div id="screen3" class="screen">
+<div id="ring">💍</div>
+<h2>Will You Be My Wife?</h2>
+<h3>Will You Be My Valentine?</h3>
+<br>
+<button onclick="yesClick()">YES 😍</button>
+<button id="noBtn" class="noBtn" onmouseover="moveNo()">NO 🙄</button>
+</div>
+
+<!-- SCREEN 4 -->
+<div id="screen4" class="screen">
+<h1>🎉 HURRAHHH!!! 🎉</h1>
+<h2>I Love You Forever ❤️</h2>
+<p>You are my today, tomorrow and always 💖</p>
+</div>
+
+<canvas id="confetti" class="confetti"></canvas>
 
 <script>
+let photos=[
+"photo1.jpeg","photo2.jpeg","photo3.jpeg",
+"photo4.jpeg","photo5.jpeg","photo6.jpeg",
+"photo7.jpeg","photo8.jpeg","photo9.jpeg"
+];
 
-function playYT(){
-var iframe=document.getElementById('ytMusic');
-iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}','*');
+let index=0;
+let taps=0;
+let slide=document.getElementById("slide");
+
+function checkPass(){
+if(document.getElementById("pass").value==="04102007"){
+document.getElementById("screen1").classList.remove("active");
+document.getElementById("screen2").classList.add("active");
+
+let player=document.getElementById("ytplayer");
+player.src=player.src.replace("autoplay=0","autoplay=1");
+
+typeWriter();
+startSlideshow();
+}else{
+alert("Wrong date 😢 Try again love");
+}
 }
 
-function checkPassword(){
-if(document.getElementById('passInput').value==="04102007"){
-document.getElementById('loginBox').style.display='none';
-document.getElementById('introSection').style.display='block';
-startPetals();
-playYT();
-}else alert('Wrong password love 😢');
+let msg="You are the reason my heart learned how to smile... Every dream I see has only you in it. My world begins with you and ends with you. 💖";
+let i=0;
+function typeWriter(){
+if(i<msg.length){
+document.getElementById("typeText").innerHTML+=msg.charAt(i);
+i++;
+setTimeout(typeWriter,50);
+}
 }
 
-function openLove(){
-document.getElementById('introSection').style.display='none';
-document.getElementById('loveSection').style.display='block';
+function startSlideshow(){
+setInterval(function(){
+index++;
+if(index>=photos.length){index=0;}
+slide.src=photos[index];
+},3000);
 }
 
-function showProposal(){
-document.getElementById('loveSection').style.display='none';
-document.getElementById('proposalSection').style.display='block';
+function nextScreen(){
+document.getElementById("screen2").classList.remove("active");
+document.getElementById("screen3").classList.add("active");
 }
 
 function moveNo(){
-let btn=document.getElementById('noBtn');
-let x=Math.random()*300-150;
-let y=Math.random()*300-150;
-btn.style.transform=`translate(${x}px,${y}px)`;
-btn.innerText='How could you say No 😭';
+let btn=document.getElementById("noBtn");
+btn.style.top=Math.random()*80+"%";
+btn.style.left=Math.random()*80+"%";
 }
 
-function sayYes(){
-document.getElementById('celebrate').style.display='block';
-document.getElementById('loveLetter').style.display='block';
-startConfetti();
+function yesClick(){
+document.getElementById("screen3").classList.remove("active");
+document.getElementById("screen4").classList.add("active");
+fireworks();
 }
 
-function closeLetter(){ document.getElementById('loveLetter').style.display='none'; }
+function fireworks(){
+let canvas=document.getElementById("confetti");
+let ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+let particles=[];
+for(let i=0;i<200;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*5+2,
+dx:Math.random()*4-2,
+dy:Math.random()*4-2
+});
+}
+setInterval(()=>{
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fillStyle="hsl("+Math.random()*360+",100%,50%)";
+ctx.fill();
+p.x+=p.dx;
+p.y+=p.dy;
+});
+},30);
+}
 
-function startPetals(){ setInterval(()=>{ let p=document.createElement('div'); p.className='petal'; p.innerText='🌹'; p.style.left=Math.random()*window.innerWidth+'px'; p.style.animationDuration=(Math.random()*3+2)+'s'; document.body.appendChild(p); setTimeout(()=>p.remove(),5000); },300); }
+document.body.addEventListener("click",()=>{
+taps++;
+if(taps===5){
+alert("💌 Secret Message: I choose you in every lifetime.");
+}
+});
 
-function startConfetti(){ setInterval(()=>{ let c=document.createElement('div'); c.className='confetti'; c.innerText='🎉'; c.style.left=Math.random()*window.innerWidth+'px'; c.style.animationDuration=(Math.random()*3+2)+'s'; document.body.appendChild(c); setTimeout(()=>c.remove(),5000); },200); }
-
-function sendWhatsApp(){ window.open('https://wa.me/?text=I%20said%20YES%20❤️','_blank'); }
-
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"%";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},500);
 </script>
 
 </body>
 </html>
+
